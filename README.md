@@ -74,4 +74,9 @@ Epoch 019: Training Loss=0.00277 Eval Loss=0.0139 Training Accuracy=0.9999 Eval 
 Epoch 020: Training Loss=0.0025 Eval Loss=0.0125 Training Accuracy=0.9999 Eval Accuracy=0.9914.
 ```
 
-<img src="docs/images/training-curves.png" width="70%">
+<img src="docs/images/training-curves-seaborn.png" width="70%">
+
+Since the results are stored in a `.sqlite` database, you could also
+use data vizualisation apps like [Metabase](https://www.metabase.com/):
+
+<img src="docs/images/training-curves-metabase.png" width="70%">
