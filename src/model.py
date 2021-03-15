@@ -58,13 +58,13 @@ class Epoch(Base):
 
     def __repr__(self):
         template_str = "Epoch {epoch}: "\
-                       "Training Loss={train_loss:.3} "\
-                       "Eval Loss={eval_loss:.3f} "\
-                       "Training Accuracy={train_acc:.3f} "\
-                       "Eval Accuracy={eval_acc:.3f}."
+                       "Training Loss={train_loss:.4} "\
+                       "Eval Loss={eval_loss:.4f} "\
+                       "Training Accuracy={train_acc:.4f} "\
+                       "Eval Accuracy={eval_acc:.4f}."
 
         return template_str.format(
-            epoch=self.number,
+            epoch=str(self.number).zfill(3),
             train_loss=self.training_loss or np.nan,
             eval_loss=self.eval_loss or np.nan,
             train_acc=self.training_acc or np.nan,

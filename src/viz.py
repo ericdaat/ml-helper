@@ -38,7 +38,7 @@ def plot_training_curves_for_model(model_id):
 
     n_epochs = data["number"].max()
     ax.set_xlim(0, data["number"].max())
-    ax.set(xticks=list(range(0, n_epochs)))
+    ax.set(xticks=list(range(0, n_epochs+1, 5)))
 
     # Accuracy
     ax2 = ax.twinx()
