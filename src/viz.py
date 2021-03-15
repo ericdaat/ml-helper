@@ -23,7 +23,7 @@ def plot_training_curves_for_model(model_id):
     data = pd.DataFrame(data)
 
     # Init figure
-    fig = plt.figure(figsize=(6, 6))
+    fig = plt.figure(figsize=(8, 8))
 
     # Loss
     ax = sns.lineplot(
@@ -61,10 +61,9 @@ def plot_training_curves_for_model(model_id):
     # Customize plot
     fig.legend(
         ("Training Loss", "Eval Loss", "Training Accuracy", "Eval Accuracy"),
-        title="Curves",
-        loc="upper right",
-        ncol=1,
-        bbox_to_anchor=(1.3, .865)
+        loc="upper center",
+        ncol=2,
+        bbox_to_anchor=(.5, .94)
     )
 
     n_epochs = data["number"].max()
@@ -77,7 +76,9 @@ def plot_training_curves_for_model(model_id):
     plt.title(
         "Training curves ({model_id})".format(model_id=model_id),
         fontdict=dict(size=15),
-        pad=15
+        pad=50
     )
+
+    plt.tight_layout()
 
     return fig
