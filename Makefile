@@ -4,4 +4,4 @@ venv/bin/activate: requirements.txt
 	touch venv/bin/activate
 
 init-db: venv/bin/activate
-	PYTHONPATH="." DATABASE_URL="sqlite:///db.sqlite" python ./src/init_db.py
+	PYTHONPATH="." python ./src/init_db.py
