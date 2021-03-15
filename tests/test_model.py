@@ -1,4 +1,3 @@
-from sqlalchemy.sql.functions import mode
 from src.model import Session, Model, Epoch
 
 
@@ -30,5 +29,3 @@ def test_create_epoch(db):
     assert retrieved_model
     assert retrieved_model.id == "SomeModelWithEpochs"
     assert len(retrieved_model.epochs) == 2
-
-
