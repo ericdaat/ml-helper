@@ -19,6 +19,8 @@ def register_model_in_db(model_id, params):
 
     _commit_object(model)
 
+    return model
+
 
 def register_epoch_in_db(model_id, epoch_number, **kwargs):
     epoch_result = Epoch(
@@ -28,6 +30,8 @@ def register_epoch_in_db(model_id, epoch_number, **kwargs):
     )
 
     _commit_object(epoch_result)
+
+    return epoch_result
 
 
 def retrieve_best_model_params():

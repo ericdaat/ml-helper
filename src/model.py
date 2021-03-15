@@ -1,6 +1,7 @@
 import uuid
 from datetime import datetime
 
+import numpy as np
 import sqlalchemy as db
 from sqlalchemy_utils import UUIDType
 from sqlalchemy.orm import relationship, sessionmaker
@@ -54,3 +55,19 @@ class Epoch(Base):
 
     training_acc = db.Column(db.Float)
     eval_acc = db.Column(db.Float)
+
+    def __repr__(self):
+        template_str = "Epoch {epoch}: "\
+                       "Training Loss={train_loss:.3} "\
+                       "Eval Loss={eval_loss:.3f} "\
+                       "Training Accuracy={train_acc:.3f} "\
+                       "Eval Accuracy={eval_acc:.3f}."
+
+        return template_str.format(
+            epoch=self.number,
+            train_loss=self.training_loss or np.nan,
+            eval_loss=self.eval_loss or np.nan,
+            train_acc=self.training_acc or np.nan,
+            eval_acc=self.eval_acc or np.nan
+        )
+
