@@ -3,12 +3,16 @@ from datetime import datetime
 
 import sqlalchemy as db
 from sqlalchemy_utils import UUIDType
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+
+from src.config import DATABASE_URL
 
 
 metadata = db.MetaData()
 Base = declarative_base(metadata=metadata)
+engine = db.create_engine(DATABASE_URL)
+Session = sessionmaker(bind=engine)
 
 
 class Model(Base):
@@ -23,7 +27,7 @@ class Model(Base):
 
     params = db.Column(db.JSON)
 
-    epoch = relationship("Epoch")
+    epochs = relationship("Epoch")
 
 
 class Epoch(Base):
@@ -35,7 +39,7 @@ class Epoch(Base):
     uuid = db.Column(UUIDType, primary_key=True, default=uuid.uuid4)
     model_id = db.Column(
         db.String,
-        db.ForeignKey('model.id'),
+        db.ForeignKey("model.id"),
     )
 
     created_at = db.Column(db.DateTime, default=datetime.now)

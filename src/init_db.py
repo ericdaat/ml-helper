@@ -1,14 +1,9 @@
 import logging
 
-import sqlalchemy as db
-from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import create_database, database_exists
 
 from src.config import DATABASE_URL
-from src.model import metadata
-
-engine = db.create_engine(DATABASE_URL)
-Session = sessionmaker(bind=engine)
+from src.model import metadata, engine
 
 
 def init_db():
