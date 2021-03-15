@@ -6,3 +6,7 @@ else:
     DATABASE_URL = "sqlite:///{path}".format(
         path=os.path.join(os.environ.get("HOME"), ".ml-helper.sqlite")
     )
+
+
+SEABORN_THEME = "ticks"
+SEABORN_PALETTE = "Set2"

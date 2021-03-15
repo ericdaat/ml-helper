@@ -2,15 +2,16 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import seaborn as sns
 
+from src.config import SEABORN_PALETTE, SEABORN_THEME
 from src.model import Session, Epoch
 
-palette = sns.color_palette("Set2")
-sns.set(style="whitegrid")
+palette = sns.color_palette(SEABORN_PALETTE)
+sns.set(style=SEABORN_THEME)
 
 
 def plot_training_curves_for_model(model_id):
+    # Retrieve data
     session = Session()
-
     data = session\
             .query(Epoch.number,
                    Epoch.training_loss,
@@ -20,6 +21,8 @@ def plot_training_curves_for_model(model_id):
             .filter_by(model_id=model_id)\
             .all()
     data = pd.DataFrame(data)
+
+    # Init figure
     fig = plt.figure(figsize=(6, 6))
 
     # Loss
@@ -36,13 +39,8 @@ def plot_training_curves_for_model(model_id):
         color=palette[1],
     )
 
-    n_epochs = data["number"].max()
-    ax.set_xlim(0, data["number"].max())
-    ax.set(xticks=list(range(0, n_epochs+1, 5)))
-
     # Accuracy
     ax2 = ax.twinx()
-
     sns.lineplot(
         data=data,
         x="number",
@@ -60,6 +58,7 @@ def plot_training_curves_for_model(model_id):
         ax=ax2
     )
 
+    # Customize plot
     fig.legend(
         ("Training Loss", "Eval Loss", "Training Accuracy", "Eval Accuracy"),
         title="Curves",
@@ -67,6 +66,11 @@ def plot_training_curves_for_model(model_id):
         ncol=1,
         bbox_to_anchor=(1.3, .865)
     )
+
+    n_epochs = data["number"].max()
+    ax.set_xlim(0, data["number"].max())
+    ax.set(xticks=list(range(0, n_epochs+1, 5)))
+
     ax.set_xlabel("Epoch number")
     ax.set_ylabel("Loss")
     ax2.set_ylabel("Accuracy")
