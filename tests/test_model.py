@@ -1,7 +1,7 @@
 from src.model import Session, Model, Epoch
 
 
-def test_create_model(db):
+def test_create_model():
     session = Session()
 
     model = Model(id="SomeModel")
@@ -9,12 +9,15 @@ def test_create_model(db):
     session.add(model)
     session.commit()
 
-    retrieved_model = session.query(Model).first()
+    retrieved_model = session\
+        .query(Model)\
+        .filter(Model.id=="SomeModel")\
+        .first()
     assert retrieved_model
     assert retrieved_model.id == "SomeModel"
 
 
-def test_create_epoch(db):
+def test_create_epoch():
     session = Session()
 
     model = Model(id="SomeModelWithEpochs")
@@ -25,7 +28,10 @@ def test_create_epoch(db):
     session.add(model)
     session.commit()
 
-    retrieved_model = session.query(Model).first()
+    retrieved_model = session\
+        .query(Model)\
+        .filter(Model.id=="SomeModelWithEpochs")\
+        .first()
     assert retrieved_model
     assert retrieved_model.id == "SomeModelWithEpochs"
     assert len(retrieved_model.epochs) == 2

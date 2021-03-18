@@ -1,7 +1,12 @@
 venv/bin/activate: requirements.txt
-	test -d venv || virtualenv venv
-	. venv/bin/activate; pip install -Ur requirements.txt
-	touch venv/bin/activate
+	test -d venv || virtualenv venv;
+	. venv/bin/activate && pip install -Ur requirements.txt;
 
 init-db: venv/bin/activate
-	PYTHONPATH="." python ./src/init_db.py
+	. venv/bin/activate && \
+	PYTHONPATH="." python ./src/init_db.py;
+
+make tests: venv/bin/activate
+	. venv/bin/activate && \
+	PYTHONPATH="." pytest tests;
+

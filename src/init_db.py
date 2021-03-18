@@ -6,9 +6,9 @@ from src.config import DATABASE_URL
 from src.model import metadata, engine
 
 
-def init_db():
-    if not database_exists(DATABASE_URL):
-        create_database(DATABASE_URL)
+def init_db(database_url):
+    if not database_exists(database_url):
+        create_database(database_url)
     metadata.drop_all(engine)
     metadata.create_all(engine)
 
@@ -16,4 +16,4 @@ def init_db():
 
 
 if __name__ == "__main__":
-    init_db()
+    init_db(DATABASE_URL)
