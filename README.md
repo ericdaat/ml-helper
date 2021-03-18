@@ -2,7 +2,23 @@
 
 ## 1. Installation
 
-WIP
+Run the following lines:
+
+``` bash
+virtualenv venv -p python3;
+source venv/bin/activate;
+pip install -r requirements.txt;
+
+python src/init_db.py;
+```
+
+Or use the provided [Makefile](./Makefile):
+
+``` bash
+make venv/bin/activate;
+make init-db;
+make tests;
+```
 
 ## 2. Usage
 
@@ -17,8 +33,10 @@ from src.viz import plot_training_curves_for_model
 
 # Register the model with the training parameters
 register_model_in_db(
-    model_id="DummyModel",
-    params=dict(lr=0.001)
+    model_id="DummyModel",  # A unique identifier for your model
+    params=dict(  # Pass the training parameters here
+        lr=0.001  # E.g: learning rate
+    )
 )
 
 # Loop for all epochs
